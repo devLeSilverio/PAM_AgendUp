@@ -1,0 +1,75 @@
+/* This is a CSS file */
+
+body{
+  background-color:#707070;
+}
+
+.teste{
+  background-color: white;
+}
+
+h1{
+color: white;
+letter-spacing: .1em;
+text-align: center;
+text-shadow: 0 10px 0 #1c1c1c, 2px 2px 2px rgba(206,89,55,0);
+}
+
+.top{
+  background-color: rgb(20, 20, 20);
+  border-bottom-left-radius:20px;
+  border-top-right-radius: 20px;
+}
+
+#edit,#delete{
+  width: 40px;
+  height: 40px;
+}
+
+#imgEdit{
+  margin-top:-8px;
+  margin-left:-7px;
+}
+
+#delete{
+  margin-left:10px;
+  margin-bottom: -50px;
+}
+
+#add{
+  border-radius:20px; 
+}
+
+#edit{
+  margin-bottom: -50px;
+}
+
+#nome{
+  font-size: 22px;
+  font-weight: bold;
+  margin:0%;
+  padding: 0%;
+  text-decoration: underline;
+  font-family: 'Consolas';
+}
+
+#email{
+  color: white;
+  margin:0%;
+  padding:0%;
+}
+
+#numero{
+  color: white;
+  margin:0%;
+  padding:0%;
+}
+
+#iconTelefone{
+  margin-bottom:-50px;
+}
+
+#nn,#nt,#ne{
+  margin:0%;
+  padding: 0%;
+}
