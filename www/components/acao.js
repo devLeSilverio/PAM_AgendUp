@@ -7,8 +7,6 @@ $(document).ready(function(){
   $("#add").prop("disabled",true);
 })
 
-
-
 function loadContacts(){
   $(".principal").children().remove();
    const keys = Object.keys(localStorage);
@@ -20,7 +18,6 @@ function loadContacts(){
     $("#update").hide();
   });
 }
-
 
 $(document).on("click","#add",function()
 {
@@ -44,9 +41,6 @@ function teste() {
       $('#add').prop('disabled', false);
     }
 }
-
-
-
 
 $(document).on("click",".funcionar",function(){
 
