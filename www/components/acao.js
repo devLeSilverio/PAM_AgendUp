@@ -4,7 +4,10 @@
 
 $(document).ready(function(){
   loadContacts();
+  $("#add").prop("disabled",true);
 })
+
+
 
 function loadContacts(){
   $(".principal").children().remove();
@@ -29,9 +32,20 @@ $(document).on("click","#add",function()
 
    $(".principal").append("<div class='row primeira'><div class='col-2 mt-2 idk'><div class='form-group'><img src='lib/icone_telefone.png' style='width:50px; height:50px;margin-bottom:-50px;'></div></div><div class='col-6 mt-2'><ul><li><label id='nome' >"+$("#nn").val()+"</label></li><li><label id='numero' >"+$("#nt").val()+"</label></li><li><label id='email' >"+$("#ne").val()+"</label></li></ul></div><div class='col-2 mt-2'><div class='form-group'><button class='btn btn-danger btn-lg funcionar'  id="+id+"><label class='xis'  id="+id+">❌</label></button></div></div><div class='col-2 mt-2'><div class='form-group'><button class='btn  btn-info btn-lg working' id="+id+"><label class='pencil' id="+id+">✏️</label></button></div></div></div>"); 
 
-clear();
-
+  clear();
+  $("#add").prop("disabled",true);
 });
+
+function teste() {
+    if($("#nn").val() === '' || $("#nt").val() === '' || $("#ne").val() === '')
+    {
+      $('#add').prop('disabled', true);
+    } else {
+      $('#add').prop('disabled', false);
+    }
+}
+
+
 
 
 $(document).on("click",".funcionar",function(){
