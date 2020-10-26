@@ -1,27 +1,47 @@
-var contador = 1;
+   localStorage.setItem("nextID",1);
+   var currentID = null;
+   var retornoCurrent = null;
+
+$(document).ready(function(){
+  loadContacts();
+})
+
+function loadContacts(){
+  $(".principal").children().remove();
+   const keys = Object.keys(localStorage);
+   keys.forEach(key =>{
+      if(key !== "nextID"){
+        const dadosJson = JSON.parse(localStorage.getItem(key)); 
+        $(".principal").append("<div class='row primeira'><div class='col-2 mt-2 idk'><div class='form-group'><img src='lib/icone_telefone.png' style='width:50px; height:50px;margin-bottom:-50px;'></div></div><div class='col-6 mt-2'><ul><li><label id='nome'>"+dadosJson.nome+"</label></li><li><label id='numero' >"+dadosJson.telefone+"</label></li><li><label id='email' >"+dadosJson.email+"</label></li></ul></div><div class='col-2 mt-2'><div class='form-group'><button class='btn btn-danger btn-lg  funcionar' id="+key+"><label class='xis'  id="+key+">❌</label></div></div><div class='col-2 mt-2'><div class='form-group'><button class='btn btn-info btn-lg working' id="+key+"><label class='pencil' id="+key+">✏️</label></button></div></div></div>"); 
+      }
+    $("#update").hide();
+  });
+}
+
 
 $(document).on("click","#add",function()
 {
+  //convertendo para parse 
+   const id = +localStorage.getItem("nextID");
    var dados = {nome:$("#nn").val(),telefone:$("#nt").val(),email:$("#ne").val()};
-   localStorage.setItem(contador,JSON.stringify(dados));
-   contador++;
+   localStorage.setItem(id,JSON.stringify(dados));
+   localStorage.setItem("nextID",id+1);
 
-  var json= {cont:contador-1};
-  var  teste= json.cont;
-  console.log(teste);
-
-   $(".principal").append("<div class='row primeira'><div class='col-2 mt-2'><div class='form-group'><img src='lib/icone_telefone.png' id="+teste+" style='width:50px; height:50px;margin-bottom:-50px;'></div></div><div class='col-6 mt-2'><label id='nome' >"+$("#nn").val()+"</label><label id='numero' >"+$("#nt").val()+"</label><label id='email' >"+$("#ne").val()+"</label></div><div class='col-2 mt-2'><div class='form-group'><button class='btn btn-danger btn-lg' id='delete'><img src='lib/icon_delete.png' id='imgEdit' width='20px' height='20px'/></button></div></div><div class='col-2 mt-2'><div class='form-group'><button class='btn  btn-info btn-lg' id='edit'><img src='lib/icon_edit.png' id='imgEdit' width='20px' height='20px'/></button></div></div></div>"); 
+   $(".principal").append("<div class='row primeira'><div class='col-2 mt-2 idk'><div class='form-group'><img src='lib/icone_telefone.png' style='width:50px; height:50px;margin-bottom:-50px;'></div></div><div class='col-6 mt-2'><ul><li><label id='nome' >"+$("#nn").val()+"</label></li><li><label id='numero' >"+$("#nt").val()+"</label></li><li><label id='email' >"+$("#ne").val()+"</label></li></ul></div><div class='col-2 mt-2'><div class='form-group'><button class='btn btn-danger btn-lg funcionar'  id="+id+"><label class='xis'  id="+id+">❌</label></button></div></div><div class='col-2 mt-2'><div class='form-group'><button class='btn  btn-info btn-lg working' id="+id+"><label class='pencil' id="+id+">✏️</label></button></div></div></div>"); 
 
 clear();
+
 });
 
-testando = 1;
 
-$(document).on("click","#delete",function(){
-$(".principal").remove(".primeira");
+$(document).on("click",".funcionar",function(){
 
-console.log(testando);
- testando++;
+const id = event.target.id;
+localStorage.removeItem(id);
+
+const removed = $("#"+id).parents(".row");
+console.log(removed);
+removed.remove();
 });
 
 
@@ -31,11 +51,24 @@ const clear = ()=>{
   $("#nt").val("");
 }
 
-function idk(){
-    var retorno = JSON.parse(localStorage.getItem(contador));
-  $("#nn").val(retorno.nome);
-  $("#ne").val(retorno.email);
-  $("#nt").val(retorno.telefone);
-}
+$(document).on("click",".working",function(){
+  currentID = event.target.id;
+
+  retornoCurrent = JSON.parse(localStorage.getItem(currentID));
+  $("#nn").val(retornoCurrent.nome);
+  $("#ne").val(retornoCurrent.email);
+  $("#nt").val(retornoCurrent.telefone);
+  $('#add').hide(500);
+  $('#update').show(1000);
+
+});
+
+$(document).on("click","#update",function(){
+  retornoCurrent = {nome:$("#nn").val(),telefone:$("#nt").val(),email:$("#ne").val()};
+  localStorage.setItem(currentID,JSON.stringify(retornoCurrent));
+  loadContacts();
+  clear();
+  $('#add').show(500);
+});
 
 
